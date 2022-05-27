@@ -2,13 +2,21 @@ package builder.model;
 
 public class Product {
 
-   private double weight;
+   private double weight ;
 
-   private double price;
+   private double price ;
 
-   private String sku;
+   private String sku ;
 
-   private String name;
+   private String name ;
+
+
+    public Product(String name) {
+        this.weight = weight;
+        this.price = price;
+        this.sku = sku;
+        this.name = name;
+    }
 
     public double getWeight() {
         return weight;

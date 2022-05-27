@@ -1,53 +1,33 @@
 package builder.builders;
 
+
 import builder.model.Product;
+import builder.model.ProdutoA;
 
-public class ProductBuilderA implements IProductBuilder{
+public class ProductBuilderA implements IProductBuilder {
 
-    protected Product productA;
-    private String categoryBeauty;
-    private String subCategorybeauty;
-
-
-    public ProductBuilderA getProductA() {
-       productA = new Product();
-       this.categoryBeauty = categoryBeauty;
-       this.subCategorybeauty = subCategorybeauty;
-       return new ProductBuilderA();
-
-
-    }
-
-    @Override
-    public void buildweight() {
-
-    }
-
-    @Override
-    public void buildprice() {
-
-    }
-
-    @Override
-    public void buildsku() {
-
-    }
-
-    @Override
-    public void buildname() {
-
-    }
-
+    //private String name;
+    private ProdutoA product;
 
 
     @Override
-    public String toString() {
-        return "ProductBuilderA{" +
-                "productA=" + productA +
-                ", categoryBeauty='" + categoryBeauty + '\'' +
-                ", subCategorybeauty='" + subCategorybeauty + '\'' +
-                '}';
+    public IProductBuilder buildName(String name) {
+         product.setName(name);
+        return this;
     }
+
+    @Override
+    public Product build() {
+        product = new ProdutoA(product.getName());
+        return product;
+    }
+
+    @Override
+    public Product getProduct() {
+        return product;
+    }
+
+
 }
 
 

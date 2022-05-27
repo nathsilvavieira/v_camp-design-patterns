@@ -4,13 +4,9 @@ import builder.model.Product;
 
 public interface IProductBuilder {
 
-    void buildweight();
+   IProductBuilder buildName(String name);
 
-    void buildprice();
+   Product build();
 
-    void buildsku();
-
-    void buildname();
-
-
+   Product getProduct();
 }
