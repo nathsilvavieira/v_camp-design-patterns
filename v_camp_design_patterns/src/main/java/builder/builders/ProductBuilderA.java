@@ -5,28 +5,18 @@ import builder.model.Product;
 import builder.model.ProdutoA;
 
 public class ProductBuilderA implements IProductBuilder {
-
-    //private String name;
-    private ProdutoA product;
-
+    private ProdutoA product= new ProdutoA("");
 
     @Override
     public IProductBuilder buildName(String name) {
-         product.setName(name);
+        product.setName(name);
         return this;
     }
 
     @Override
     public Product build() {
-        product = new ProdutoA(product.getName());
-        return product;
+        return new ProdutoA(product.getName());
     }
-
-    @Override
-    public Product getProduct() {
-        return product;
-    }
-
 
 }
 

@@ -8,24 +8,13 @@ public class ProductDiretor {
 
     private IProductBuilder builder;
 
-
-
-
     public ProductDiretor(IProductBuilder builder) {
-
-        this.builder= builder;
+        this.builder = builder;
     }
 
-
-      public void constructProductA(){
-       builder.buildName("Produto A");
-       builder.build();
-
+    public Product constructProduct(){
+      // builder.buildName("Produto A");
+       return builder.build();
     }
-
-    public Product getProductCreated() {
-        return builder.getProduct();
-    }
-
 
 }

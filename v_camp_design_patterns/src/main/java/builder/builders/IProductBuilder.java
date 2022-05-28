@@ -8,5 +8,5 @@ public interface IProductBuilder {
 
    Product build();
 
-   Product getProduct();
+//   Product getProduct();
 }
