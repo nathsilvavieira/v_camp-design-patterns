@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ProductInventory extends Reserve {
+public class ProductInventory {
     private ProductInventory productInventory;
 
     // Map usa Chave Valor
@@ -38,38 +38,38 @@ public class ProductInventory extends Reserve {
         return stock.get(product);
     }
 
-    public void blockProductsFromStock(String product, int quantity){
+    public void blockProductsFromStock(String product, int quantity) {
 
-        if(getProductQuantity(product)<quantity){
+        List<Reserve> expired = null;
+        if (getProductQuantity(product) < quantity) {
             System.out.println("Sorry, we can't block this itens, because we don't have these quantities in stock." +
-                    "Please enter an amount less than "+ getProductQuantity(product));
-        }else if(getProductQuantity(product)>=quantity) {
+                    "Please enter an amount less than " + getProductQuantity(product));
+        } else if (getProductQuantity(product) >= quantity) {
 
-            List<Reserve> expired = new ArrayList<>();
-            //map
-            for (Reserve reserve : reserveList) {
+            //Falta fazer o Map para percorrer a lista de reserva, verificar se a reserva esta expirada,
+            // guardar na lista de expirados, remover os itens espirados e devolver as quantidades no estoque
+
+            expired = new ArrayList<>();
+            reserved.remove(expired);
+
+           /* for (Reserve reserve : reserveList) {
                 if (reserve.isDateExpired()) {
                     expired.add(reserve);
                 }
-            }
+            }*/
 
-            reserved.forEach(product, reserveList ->);
-        }
-          //  reserveList.removeAll(expired);
-
+            //atualizando estoque
             int atualStock = getProductQuantity(product);
-
             int newStock = atualStock - quantity;
-
             stock.put(product, newStock);
 
             //list de reservas
-            reserveList.add(new Reserve());
-
-            reserved.put(product,reserveList);
-
+            reserveList.add(new Reserve(quantity, product,LocalDateTime.now(),LocalDateTime.now().plusHours(1)));
+            reserved.put(product, reserveList);
             System.out.println("Your products are reserved, this reservation expires in 2 days");
         }
+
+    }
 
 
 

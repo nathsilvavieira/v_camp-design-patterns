@@ -9,6 +9,16 @@ public class Reserve {
     LocalDateTime nowDate = LocalDateTime.now();
     LocalDateTime expiredDate = LocalDateTime.now().plusHours(1);
 
+    public Reserve(int quantity, String product, LocalDateTime nowDate, LocalDateTime expiredDate) {
+        this.quantity = quantity;
+        this.product = product;
+        this.nowDate = nowDate;
+        this.expiredDate = expiredDate;
+    }
+
+    public Reserve() {
+
+    }
 
     public int getQuantity() {
         return quantity;

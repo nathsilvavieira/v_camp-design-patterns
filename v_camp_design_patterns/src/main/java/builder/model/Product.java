@@ -11,7 +11,7 @@ public class Product {
    private String name ;
 
 
-    public Product(String name) {
+    public Product(String name, String sku, double price, double weight) {
         this.weight = weight;
         this.price = price;
         this.sku = sku;

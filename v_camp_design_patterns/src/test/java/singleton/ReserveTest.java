@@ -8,9 +8,6 @@ public class ReserveTest {
 
 
 
-    @Test
-    public boolean isDateExpired(){
-        return getExpiredDate().isAfter(getNowDate());
-    }
+
 
 }
