@@ -82,4 +82,14 @@ public class ProductInventory {
 
 
     }
+
+    public void addProductFromStock(String product, int quantity) {
+        int atualStock = stock.get(product);
+
+        int newStock = atualStock + quantity;
+
+        stock.put(product, newStock);
+
+
+    }
 }
