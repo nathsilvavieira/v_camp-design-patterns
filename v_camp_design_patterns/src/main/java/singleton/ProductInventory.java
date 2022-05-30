@@ -1,6 +1,6 @@
 package singleton;
 
-import builder.model.Product;
+import builder.model.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -9,24 +9,22 @@ import java.util.stream.Collectors;
 public class ProductInventory {
     private ProductInventory productInventory;
 
-    // Map usa Chave Valor
-    private Map<String,Integer> stock = new HashMap<>();
 
-    //lista de reservas
-    public List<Reserve> reserveList = new ArrayList<>();
+    public List<Stock> stockList = new ArrayList<Stock>();
 
-    // guardar itens removidos na lista de reserva
-    public Map<String, List> reserved = new HashMap<>();
+    //Lista de reservas para add no Map
+    public List<Reserve> reserveList = new ArrayList<Reserve>();
 
+    // Produtos reservados
+    public Map<String, List<Reserve>> reserved = new HashMap<>();
 
 
     private ProductInventory() {
         this.productInventory = productInventory;
-        stock.put("ProductA",10);
-        stock.put("ProductB",10);
-        stock.put("ProductC",10);
-        stock.put("ProductD",10);
-
+        Product productA = new ProductA("Name", "SKU", 0.0, 0.0, "Beauty", "subcategory");
+        Product productB = new ProductB("Name", "SKU", 0.0, 0.0, "Food", "subcategory");
+        Product productC = new ProductC("Name", "SKU", 0.0, 0.0, "Auto", "subcategory");
+        Product productD = new ProductD("Name", "SKU", 0.0, 0.0, "Eletronic", "subcategory");
     }
 
     public ProductInventory getInstance() {
@@ -34,8 +32,12 @@ public class ProductInventory {
     }
 
     //Usando a chave para pegar o valor stock
-    public int getProductQuantity(String product){
-        return stock.get(product);
+    public int getProductQuantity(String productName) {
+        List<Stock> list = stockList.stream().filter(stock -> {
+                    return stock.getProduct().getName().equals(productName);
+                }
+        ).collect(Collectors.toList());
+        return list.get(0).getQuantity();
     }
 
     public void blockProductsFromStock(String product, int quantity) {
@@ -49,47 +51,46 @@ public class ProductInventory {
             //Falta fazer o Map para percorrer a lista de reserva, verificar se a reserva esta expirada,
             // guardar na lista de expirados, remover os itens espirados e devolver as quantidades no estoque
 
-            expired = new ArrayList<>();
-            reserved.remove(expired);
+            reserved.forEach((key, reserveList) -> {
+                reserveList.forEach((reserve) -> {
+                            if (reserve.isDateExpired()) {
+                                reserveList.remove(reserve);
+                                List<Stock> list = stockList.stream().filter(stock -> {
+                                    return stock.getProduct().getName().equals(reserve.getProduct());
+                                }).collect(Collectors.toList());
+                                list.get(0).setQuantity(reserve.getQuantity() + getProductQuantity(reserve.getProduct()));
+                            }
 
-           /* for (Reserve reserve : reserveList) {
-                if (reserve.isDateExpired()) {
-                    expired.add(reserve);
-                }
-            }*/
+                        }
+                );
+            });
 
             //atualizando estoque
-            int atualStock = getProductQuantity(product);
-            int newStock = atualStock - quantity;
-            stock.put(product, newStock);
+            List<Stock> list = stockList.stream().filter(stock -> {
+                return stock.getProduct().getName().equals(product);
+            }).collect(Collectors.toList());
+            list.get(0).setQuantity(quantity-getProductQuantity(product));
 
             //list de reservas
-            reserveList.add(new Reserve(quantity, product,LocalDateTime.now(),LocalDateTime.now().plusHours(1)));
+            reserveList.add(new Reserve(quantity, product, LocalDateTime.now(), LocalDateTime.now().plusHours(1)));
             reserved.put(product, reserveList);
-            System.out.println("Your products are reserved, this reservation expires in 2 days");
+            System.out.println("Your products are reserved, this reservation will expires in 1 hour");
         }
 
     }
 
 
-
     public void removeProductFromStock(String product, int quantity) {
-    int atualStock = stock.get(product);
-
-    int newStock = atualStock - quantity;
-
-    stock.put(product, newStock);
-
-
+        List<Stock> list = stockList.stream().filter(stock -> {
+            return stock.getProduct().getName().equals(product);
+        }).collect(Collectors.toList());
+        list.get(0).setQuantity(quantity-getProductQuantity(product));
     }
 
     public void addProductFromStock(String product, int quantity) {
-        int atualStock = stock.get(product);
-
-        int newStock = atualStock + quantity;
-
-        stock.put(product, newStock);
-
-
+        List<Stock> list = stockList.stream().filter(stock -> {
+            return stock.getProduct().getName().equals(product);
+        }).collect(Collectors.toList());
+        list.get(0).setQuantity(quantity+getProductQuantity(product));
     }
 }

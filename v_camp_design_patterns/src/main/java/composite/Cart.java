@@ -1,17 +1,22 @@
 package composite;
 
-import builder.catalog.Catalog;
-import factoryMethod.factory.Shipping;
+import factoryMethod.ShippingFactory;
 import singleton.ProductInventory;
 
 public class Cart {
 
     private ProductInventory productInventory;
     private Catalog catalog;
-    private Shipping shipping;
+    private ShippingFactory shippingFactory;
+
+
+    private double purchasePrice=0;
+    private double weight=0;
+    private int quantityOfProducts=0;
 
 
     public void addItem(String product, int quantity) {
+
         productInventory.removeProductFromStock(product,quantity);
     }
 
@@ -26,12 +31,20 @@ public class Cart {
 
     public double getTotal(){
 
-        return 0;
+                return 0;
     }
 
     public double getWeight(){
 
         return 0;
+    }
+
+
+    public double  calculateShipping(Cart cart){
+        double  shippingPrice = (purchasePrice*1.10)*quantityOfProducts;
+        if(shippingPrice>7.99)
+            return shippingPrice;
+        return 7.99+quantityOfProducts;
     }
 
 

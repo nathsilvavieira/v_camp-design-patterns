@@ -1,4 +1,4 @@
-package builder.catalog;
+package composite;
 
 import builder.builders.ProductBuilderA;
 import builder.builders.ProductBuilderB;
@@ -14,7 +14,7 @@ public class Catalog {
 
     List<Product> productList = new ArrayList<>();
 
-    ProductDiretor director = new  ProductDiretor(new ProductBuilderA());
+   /* ProductDiretor director = new  ProductDiretor(new ProductBuilderA());
     ProductDiretor  director2 = new  ProductDiretor(new ProductBuilderB());
     ProductDiretor  director3 = new  ProductDiretor(new ProductBuilderC());
     ProductDiretor  director4 = new  ProductDiretor(new ProductBuilderD());
@@ -30,7 +30,7 @@ public class Catalog {
         productList.add(productC);
         productList.add(productD);
 
-    }
+    }*/
 
 
     public List getAllProducts() {

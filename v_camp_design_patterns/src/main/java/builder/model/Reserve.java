@@ -1,4 +1,4 @@
-package singleton;
+package builder.model;
 
 import java.time.LocalDateTime;
 
