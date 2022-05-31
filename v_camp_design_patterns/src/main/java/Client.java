@@ -4,6 +4,7 @@ import builder.builders.ProductBuilderC;
 import builder.builders.ProductBuilderD;
 import builder.director.ProductDiretor;
 import builder.model.Product;
+import composite.Catalog;
 
 
 public class Client {
@@ -20,6 +21,12 @@ public class Client {
         System.out.println(product1);
         System.out.println(product2);
         System.out.println(product3);
+
+
+
+
+
+
     }
 
 

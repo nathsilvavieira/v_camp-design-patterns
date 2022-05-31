@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Catalog {
 
-    List<Product> productList = new ArrayList<>();
+    List<Product> productList = new ArrayList<Product>();
 
    /* ProductDiretor director = new  ProductDiretor(new ProductBuilderA());
     ProductDiretor  director2 = new  ProductDiretor(new ProductBuilderB());
