@@ -18,10 +18,10 @@ public class Cart {
     Map<Product,Integer> cart = new HashMap<>();
 
     public void addItem(Product product, int quantity) { //no carrinho
-        int productsFromInventory = productInventory.getProductQuantity(product.getName());
+        int productsFromInventory = productInventory.getProductQuantity(product);
 
         if(productsFromInventory>=quantity){
-            productInventory.removeProductFromStock(product.getName(),quantity);
+            productInventory.removeProductFromStock(product,quantity);
             cart.put(product,quantity);
             System.out.println(" Adicionou  ");
         }else {
@@ -35,10 +35,10 @@ public class Cart {
 
         if(quantity>=cartQuantity){
             quantity = cartQuantity;
-            productInventory.addProductFromStock(product.getName(),quantity);
+            productInventory.addProductFromStock(product,quantity);
             cart.remove(product);
         }else {
-            productInventory.addProductFromStock(product.getName(),quantity);
+            productInventory.addProductFromStock(product,quantity);
             cart.put(product, cartQuantity-quantity);
         }
 

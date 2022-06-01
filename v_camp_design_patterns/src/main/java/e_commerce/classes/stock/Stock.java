@@ -4,6 +4,11 @@ import e_commerce.model.Product;
 
 public class Stock {
 
+    public Stock(int quantity, Product product) {
+        this.quantity = 10;
+        this.product = product;
+    }
+
     private int quantity;
 
     private Product product;

@@ -29,7 +29,6 @@ public class CartTest {
 
     @Before
     public void addToCatalogTest(){
-        //catalog.productList.add(new Product("Teste", "Sku", 0.0, 0.0));
 
         catalog.productList.add(productA);
         catalog.productList.add(productB);
@@ -37,17 +36,10 @@ public class CartTest {
         catalog.productList.add(productD);
 
     }
-
-
-
-
     @Test
     public void addToCartTest(){
 
-       Product product = catalog.productList.get(0);
-
-
-       cart.addItem(product, 2);
+       cart.addItem(productA, 2);
 
     }
 

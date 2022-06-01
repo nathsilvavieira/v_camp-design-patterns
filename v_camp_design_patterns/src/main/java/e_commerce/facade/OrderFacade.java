@@ -52,7 +52,6 @@ public class OrderFacade implements IOrderFacade {
 
                 break;
             case "cancelled":
-                pending.getStatus();
                 cancelled.OrderCancelled(product);
                 System.out.println(cancelled.getStatusCancelled());
                 break;
