@@ -1,8 +1,8 @@
 package factoryMethod;
 
+import e_commerce.factoryMethod.ShippingFactory;
+import e_commerce.interfaces.IShipping;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ShippingFactoryTest {
 
