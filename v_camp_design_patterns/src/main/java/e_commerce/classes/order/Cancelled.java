@@ -10,9 +10,8 @@ public class Cancelled {
 
     private String status = "Order cancelled";
 
-    private ProductInventory productInventory;
-    private Catalog catalog;
-    private ShippingFactory shippingFactory;
+    private ProductInventory productInventory = ProductInventory.getInstance();
+
     private Cart cart;
 
 

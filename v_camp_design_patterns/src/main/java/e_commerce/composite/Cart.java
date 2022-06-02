@@ -24,15 +24,16 @@ public class Cart {
         if(productsFromInventory>=quantity){
             productInventory.removeProductFromStock(product,quantity);
             cart.put(product,quantity);
-            System.out.println(" Adicionou  ");
+            System.out.println("Product added");
         }else {
-            System.out.println(" Falhou  "+ productsFromInventory);
+            System.out.println(" Sorry, we were unable to add to cart. "+
+                    "Please enter an amount less than " + productsFromInventory);
         }
 
     }
 
     public void removeItem(Product product, int quantity) { //do carrinho
-        int cartQuantity = cart.get(product);
+        int cartQuantity = cart.get(product).intValue();
 
         if(quantity>=cartQuantity){
             quantity = cartQuantity;
@@ -43,6 +44,7 @@ public class Cart {
             cart.put(product, cartQuantity-quantity);
         }
 
+        System.out.println("Product removed");
     }
 
     public int getProducts(){ // do carrinho
@@ -70,8 +72,8 @@ public class Cart {
     }
 
     public double calculateShippingCost(Cart cart){
-        double totalProductQuantityFromCart = getTotal();
-        double  shippingPrice = (getTotal()*1.10)*totalProductQuantityFromCart;
+        double totalProductQuantityFromCart = getProducts();
+        double  shippingPrice = (getTotal()*0.10)+totalProductQuantityFromCart;
         if(shippingPrice>7.99)
             return shippingPrice;
         return 7.99+totalProductQuantityFromCart;

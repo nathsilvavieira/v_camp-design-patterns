@@ -36,34 +36,41 @@ public class CartTest {
     @Test
     public void  a_addToCartTest(){
        cart.addItem(product, 2);
-        System.out.println(cart.cart.get(product));
+
 
     }
 
     @Test
     public void b_removeItem() {
-
+        cart.addItem(product, 2);
+        System.out.println(cart.cart.get(product));
         cart.removeItem(product,1);
         System.out.println(cart.cart.get(product));
     }
 
     @Test
     public void c_getProducts() {
-        System.out.println(cart.getProducts());
+        cart.addItem(product, 5);
+        System.out.println(cart.cart.get(product));
+
+
     }
 
     @Test
     public void d_getTotal() {
+        cart.addItem(product, 5);
         System.out.println(cart.getTotal());
     }
 
     @Test
     public void e_getWeight() {
+        cart.addItem(product, 5);
         System.out.println(cart.getWeight());
     }
 
     @Test
     public void f_calculateShipping() {
+        cart.addItem(product, 5);
         System.out.println(cart.calculateShippingCost(cart));
     }
 }

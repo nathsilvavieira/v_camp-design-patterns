@@ -1,17 +1,25 @@
 package e_commerce.factory;
 
 import e_commerce.factoryMethod.ShippingFactory;
-import e_commerce.interfaces.IShipping;
 import org.junit.Test;
 
 public class ShippingFactoryTest {
 
+
+    ShippingFactory shippingFactory = new ShippingFactory();
+
+
+    @Test
+    public void factoryTestRoad(){
+
+        System.out.println(shippingFactory.createShipping(10).description());
+
+    }
+
     @Test
     public void factoryTest(){
-        IShipping iShipping;
-        ShippingFactory shippingFactory = new ShippingFactory();
 
-        shippingFactory.createShipping(10).description();
+        System.out.println(shippingFactory.createShipping(5).description());
 
     }
 
