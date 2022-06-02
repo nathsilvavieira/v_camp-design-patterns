@@ -1,4 +1,4 @@
-package builder;
+package e_commerce.director;
 
 import e_commerce.builders.BeautyProductsBuilder;
 import e_commerce.builders.FoodProductsBuilder;

@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 public class ProductInventory {
     private static ProductInventory  productInventory;
 
-
-
     public List<Stock> stockList = new ArrayList<Stock>();
 
     //Lista de reservas para add no Map
@@ -20,37 +18,35 @@ public class ProductInventory {
 
     // Produtos reservados
     public Map<String, List<Reserve>> reservedFromStock = new HashMap<>();
-    public static Stock beauty = new Stock(10, new BeautyProducts("Beauty Product", "BEU123", 10.0, 1.0, "Beauty", "subcategory - beauty"));
-    public static Stock food = new Stock(10,new FoodProducts("Food Product", "FOO123", 5.0, 0.5, "Food", "subcategory - food"));
-    public static Stock eletronic = new Stock(10,new EletronicProducts("Eletronic Product", "ELE123", 50.0, 2.0, "Eletronic", "subcategory - eletronic"));
-    public static Stock auto = new Stock(10,new AutoProducts("Auto Product", "AUT123", 500.0, 5.0, "Auto", "subcategory - auto"));
 
+     public static Product beauty = new BeautyProducts("Beauty Product", "BEU123", 10.0, 1.0, "Beauty", "subcategory - beauty");
+     public static Product food = new FoodProducts("Food Product", "FOO123", 5.0, 0.5, "Food", "subcategory - food");
+     public static Product eletronic = new EletronicProducts("Eletronic Product", "ELE123", 50.0, 2.0, "Eletronic", "subcategory - eletronic");
+     public static Product auto = new AutoProducts("Auto Product", "AUT123", 500.0, 5.0, "Auto", "subcategory - auto");
+   private ProductInventory() {
 
-    ProductInventory(Stock stockBeauty, Stock foodProduct, Stock eletronicProducts, Stock autoProducts) {
-        this.productInventory = productInventory;
-        Product beauty = new BeautyProducts("Beauty Product", "BEU123", 10.0, 1.0, "Beauty", "subcategory - beauty");
-        Product food = new FoodProducts("Food Product", "FOO123", 5.0, 0.5, "Food", "subcategory - food");
-        Product eletronic = new EletronicProducts("Eletronic Product", "ELE123", 50.0, 2.0, "Eletronic", "subcategory - eletronic");
-        Product auto = new AutoProducts("Auto Product", "AUT123", 500.0, 5.0, "Auto", "subcategory - auto");
+        stockList.add(new Stock(10,beauty));
+        stockList.add(new Stock(10,food));
+        stockList.add(new Stock(10,eletronic));
+        stockList.add(new Stock(10,auto));
     }
 
     public static ProductInventory getInstance() {
         if(productInventory==null){
-            productInventory = new ProductInventory(beauty, food, eletronic,auto);
+            productInventory = new ProductInventory();
+            return productInventory;
         }
         return productInventory;
     }
 
-    //Usando a chave para pegar o valor stock
     public int getProductQuantity(Product product) {// do inventario
-        List<Stock> list = new ArrayList<>();
-        stockList.forEach(stock -> list.add(0,stock));
-        return list.get(0).getQuantity();
-
-        //List <Stock> stockListOfProducts = stockList.stream().filter(stock -> {return stock.getProduct().equals(product); }).collect(Collectors.toList());
-       // int productQuantity = stockListOfProducts.size();
-
-
+        int quantityStock=0;
+        for (Stock stock: stockList) {
+             if (stock.getProduct().getName().equals(product.getName())){
+                 quantityStock= stock.getQuantity();
+             }
+        }
+        return quantityStock;
     }
 
     public void blockProductsFromStock(Product product, int quantity) {
@@ -68,10 +64,15 @@ public class ProductInventory {
                 reserveList.forEach((reserve) -> {
                             if (reserve.isDateExpired()) {
                                 reserveList.remove(reserve);
-                                List<Stock> list = stockList.stream().filter(stock -> {
+                                for (Stock stock:stockList) {
+                                    if (stock.getProduct().equals(reserve.getProduct())){
+                                        stock.setQuantity(reserve.getQuantity()+getProductQuantity(product));
+                                    }
+                                }
+                                /*List<Stock> list = stockList.stream().filter(stock -> {
                                     return stock.getProduct().getName().equals(reserve.getProduct());
                                 }).collect(Collectors.toList());
-                                list.get(0).setQuantity(reserve.getQuantity() + getProductQuantity(product));
+                                list.get(0).setQuantity(reserve.getQuantity() + getProductQuantity(product));*/
                             }
 
                         }
@@ -79,10 +80,11 @@ public class ProductInventory {
             });
 
             //atualizando estoque
-            List<Stock> list = stockList.stream().filter(stock -> {
-                return stock.getProduct().getName().equals(product);
-            }).collect(Collectors.toList());
-            list.get(0).setQuantity(quantity-getProductQuantity(product));
+            for (Stock stock:stockList) {
+                if(stock.getProduct().getName().equals(product.getName())){
+                    stock.setQuantity(getProductQuantity(product)-quantity);
+                }
+            }
 
             //lista de reservas
             reservedProductsList.add(new Reserve(quantity, product.getName(), LocalDateTime.now(), LocalDateTime.now().plusHours(1)));
@@ -94,27 +96,19 @@ public class ProductInventory {
 
 
     public void removeProductFromStock(Product product, int quantity) {
-       /* List<Stock> list = stockList.stream().filter(stock -> {
-            return stock.getProduct().getName().equals(product);
-        }).collect(Collectors.toList());
-        list.get(0).setQuantity(quantity-getProductQuantity(product));*/
-
-        List<Stock> list = new ArrayList<>();
-        stockList.forEach(stock -> list.add(0,stock));
-        list.get(0).setQuantity(getProductQuantity(product)-quantity);
+        for (Stock stock: stockList) {
+            if (stock.getProduct().getName().equals(product.getName())){
+                stock.setQuantity(getProductQuantity(product)-quantity);
+            }
+        }
     }
 
     public void addProductFromStock(Product product, int quantity) {
-        List<Stock> list = new ArrayList<>();
-        stockList.forEach(stock -> list.add(0,stock));
-        list.get(0).setQuantity(getProductQuantity(product)+quantity);
-
-        /*
-        List<Stock> list = stockList.stream().filter(stock -> {
-            return stock.getProduct().getName().equals(product);
-        }).collect(Collectors.toList());
-        list.get(0).setQuantity(quantity+getProductQuantity(product));*/
-
+        for (Stock stock: stockList) {
+            if (stock.getProduct().getName().equals(product.getName())){
+                stock.setQuantity(getProductQuantity(product)+quantity);
+            }
+        }
         if(reservedFromStock.containsKey(product)){
             reservedFromStock.forEach((key, reserveList)->{
                 reserveList.forEach((reserve)->{

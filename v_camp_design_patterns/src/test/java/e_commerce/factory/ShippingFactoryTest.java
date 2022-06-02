@@ -1,4 +1,4 @@
-package factoryMethod;
+package e_commerce.factory;
 
 import e_commerce.factoryMethod.ShippingFactory;
 import e_commerce.interfaces.IShipping;

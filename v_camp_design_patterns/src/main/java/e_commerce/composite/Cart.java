@@ -12,10 +12,11 @@ import java.util.Map;
 
 public class Cart {
 
-    private ProductInventory productInventory;
-    private Catalog catalog;
-    private ShippingFactory shippingFactory;
+    private ProductInventory productInventory = ProductInventory.getInstance();
+
+
     Map<Product,Integer> cart = new HashMap<>();
+
 
     public void addItem(Product product, int quantity) { //no carrinho
         int productsFromInventory = productInventory.getProductQuantity(product);

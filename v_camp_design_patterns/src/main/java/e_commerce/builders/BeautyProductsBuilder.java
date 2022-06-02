@@ -6,7 +6,7 @@ import e_commerce.model.Product;
 import e_commerce.model.BeautyProducts;
 
 public class BeautyProductsBuilder implements IProductBuilder {
-    private BeautyProducts product= new BeautyProducts("ProdutoA", "SKU123", 0.0, 0.0,"Default", "Default");
+    private BeautyProducts product= new BeautyProducts("Beauty Product", "BEU123", 10.0, 1.0, "Beauty", "subcategory - beauty");
 
     @Override
     public IProductBuilder buildName(String name) {
