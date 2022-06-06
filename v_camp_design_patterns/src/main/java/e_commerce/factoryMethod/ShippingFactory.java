@@ -9,11 +9,9 @@ public class ShippingFactory {
     public IShipping createShipping(double weigth) {
         if(weigth<10){
             return new Aero();
-        }
-        else {
+        } else {
             return new Road();
         }
     }
-
 
    }

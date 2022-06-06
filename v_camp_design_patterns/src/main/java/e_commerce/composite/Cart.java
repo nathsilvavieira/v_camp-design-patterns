@@ -2,7 +2,6 @@ package e_commerce.composite;
 
 import e_commerce.model.Product;
 
-import e_commerce.factoryMethod.ShippingFactory;
 import e_commerce.singleton.ProductInventory;
 
 
@@ -15,7 +14,7 @@ public class Cart {
     private ProductInventory productInventory = ProductInventory.getInstance();
 
 
-    Map<Product,Integer> cart = new HashMap<>();
+    public Map<Product,Integer> cartList = new HashMap<>();
 
 
     public void addItem(Product product, int quantity) { //no carrinho
@@ -23,7 +22,7 @@ public class Cart {
 
         if(productsFromInventory>=quantity){
             productInventory.removeProductFromStock(product,quantity);
-            cart.put(product,quantity);
+            cartList.put(product,quantity);
             System.out.println("Product added");
         }else {
             System.out.println(" Sorry, we were unable to add to cart. "+
@@ -33,15 +32,15 @@ public class Cart {
     }
 
     public void removeItem(Product product, int quantity) { //do carrinho
-        int cartQuantity = cart.get(product).intValue();
+        int cartQuantity = cartList.get(product).intValue();
 
         if(quantity>=cartQuantity){
             quantity = cartQuantity;
             productInventory.addProductFromStock(product,quantity);
-            cart.remove(product);
+            cartList.remove(product);
         }else {
             productInventory.addProductFromStock(product,quantity);
-            cart.put(product, cartQuantity-quantity);
+            cartList.put(product, cartQuantity-quantity);
         }
 
         System.out.println("Product removed");
@@ -49,7 +48,7 @@ public class Cart {
 
     public int getProducts(){ // do carrinho
         int quantity=0;
-        for (Map.Entry<Product,Integer> entry : cart.entrySet()){
+        for (Map.Entry<Product,Integer> entry : cartList.entrySet()){
             quantity+= entry.getValue();
         }
         return quantity;
@@ -57,7 +56,7 @@ public class Cart {
 
     public double getTotal(){ //do carrinho
         double total=0;
-        for (Map.Entry<Product, Integer> entry : cart.entrySet()) {
+        for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
            total+= (entry.getKey().getPrice())* entry.getValue();
         }
                 return total;
@@ -65,13 +64,13 @@ public class Cart {
 
     public double getWeight(){ //do carrinho
         double weight = 0;
-        for (Map.Entry<Product,Integer> entry: cart.entrySet()) {
+        for (Map.Entry<Product,Integer> entry: cartList.entrySet()) {
             weight += (entry.getKey().getWeight())* entry.getValue();
         }
         return weight;
     }
 
-    public double calculateShippingCost(Cart cart){
+    public double calculateShippingCost(){
         double totalProductQuantityFromCart = getProducts();
         double  shippingPrice = (getTotal()*0.10)+totalProductQuantityFromCart;
         if(shippingPrice>7.99)

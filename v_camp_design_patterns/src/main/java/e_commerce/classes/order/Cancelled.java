@@ -1,16 +1,16 @@
 package e_commerce.classes.order;
 
 import e_commerce.composite.Cart;
-import e_commerce.composite.Catalog;
-import e_commerce.factoryMethod.ShippingFactory;
-import e_commerce.model.Product;
+import e_commerce.interator.Orderlist;
+import e_commerce.interfaces.IOrderFacade;
 import e_commerce.singleton.ProductInventory;
 
-public class Cancelled {
+public class Cancelled implements IOrderFacade {
 
     private String status = "Order cancelled";
 
     private ProductInventory productInventory = ProductInventory.getInstance();
+    private Orderlist orderlist;
 
     private Cart cart;
 
@@ -20,10 +20,10 @@ public class Cancelled {
         return status;
     }
 
-    public void OrderCancelled(Product product){
-        int quantityOrder =cart.getProducts();
-        cart.removeItem(product,quantityOrder);
+
+    @Override
+    public void changeOrderStatus() {
+       System.out.println(getStatusCancelled());
+
     }
-
-
 }

@@ -1,30 +1,21 @@
 package e_commerce.classes.order;
 
 import e_commerce.composite.Cart;
-import e_commerce.composite.Catalog;
-import e_commerce.factoryMethod.ShippingFactory;
-import e_commerce.model.Product;
-import e_commerce.singleton.ProductInventory;
+import e_commerce.interfaces.IOrderFacade;
 
-public class Completed {
+public class Completed implements IOrderFacade {
 
-    private String status = "Completed";
+    private String status = "Order completed";
 
-    private ProductInventory productInventory;
-    private Catalog catalog;
-    private ShippingFactory shippingFactory;
     private Cart cart;
 
     public String getStatusCompleted() {
         return status;
     }
 
-    public void OrderCompleted(Product product){
-        productInventory.reservedFromStock.forEach((key, reserveList)->{
-            reserveList.forEach((reserve)->{
-                reserveList.remove(reserve);
-            });
-        });
 
+    @Override
+    public void changeOrderStatus() {
+        System.out.println(getStatusCompleted());
     }
 }

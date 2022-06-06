@@ -5,8 +5,6 @@ import e_commerce.director.ProductDiretor;
 import e_commerce.model.Product;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class OrderFacadeTest {
 
     OrderFacade orderFacade = new OrderFacade();
@@ -16,7 +14,8 @@ public class OrderFacadeTest {
 
     @Test
     public void changeOrderStatus() {
-        orderFacade.changeOrderStatus("paid",product);
+
+
 
 
     }

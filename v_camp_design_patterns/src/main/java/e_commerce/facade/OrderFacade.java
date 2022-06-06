@@ -2,18 +2,9 @@ package e_commerce.facade;
 
 import e_commerce.classes.order.*;
 import e_commerce.composite.Cart;
-import e_commerce.factoryMethod.ShippingFactory;
-import e_commerce.interfaces.IOrderFacade;
-import e_commerce.model.Product;
-import e_commerce.singleton.ProductInventory;
 
-public class OrderFacade implements IOrderFacade {
 
-    Cart cart;
-
-    ShippingFactory shippingFactory;
-
-    ProductInventory productInventory;
+public class OrderFacade{
 
     private Pending pending;
     private Paid paid;
@@ -29,33 +20,30 @@ public class OrderFacade implements IOrderFacade {
         cancelled= new Cancelled();
     }
 
+    public void changeOrderToCancelled(Cart cart){
+        cancelled.changeOrderStatus();
+    }
 
-    @Override
-    public void changeOrderStatus(String status, Product product) {
-        switch (status.toLowerCase()){
-            case "pending":
-
-                pending.getStatus();
-
-                break;
-            case "paid":
-                paid.getStatus();
-
-                break;
-            case  "completed":
-
-                completed.getStatusCompleted();
-
-                break;
-            case "shipped":
-                shipped.getStatus();
-
-                break;
-            case "cancelled":
-                cancelled.OrderCancelled(product);
-                System.out.println(cancelled.getStatusCancelled());
-                break;
-        }
+    public void changeOrderToPending(Cart cart){
+        pending.changeOrderStatus();
 
     }
+
+    public void changeOrderToPaid(Cart cart){
+        paid.changeOrderStatus();
+
+    }
+
+    public void changeOrderToShipped(Cart cart){
+        shipped.changeOrderStatus();
+
+    }
+
+    public void changeOrderToCompleted(Cart cart){
+        completed.changeOrderStatus();
+
+    }
+
+
+
 }

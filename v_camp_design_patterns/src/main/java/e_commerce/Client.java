@@ -7,22 +7,39 @@ import e_commerce.builders.AutoProductsBuilder;
 import e_commerce.director.ProductDiretor;
 import e_commerce.model.Product;
 
+import javax.sound.midi.Soundbank;
+import java.util.Locale;
+import java.util.Scanner;
+
 
 public class Client {
     public static void main(String[] args) {
-        ProductDiretor  director = new  ProductDiretor(new BeautyProductsBuilder());
-        ProductDiretor  director2 = new  ProductDiretor(new FoodProductsBuilder());
-        ProductDiretor  director3 = new  ProductDiretor(new EletronicProductsBuilder());
-        ProductDiretor  director4 = new  ProductDiretor(new AutoProductsBuilder());
-        Product product = director.constructProduct();
-        Product product1 = director2.constructProduct();
-        Product product2 = director3.constructProduct();
-        Product product3 = director4.constructProduct();
-        System.out.println(product);
-        System.out.println(product1);
-        System.out.println(product2);
-        System.out.println(product3);
 
+        Scanner sc = new Scanner(System.in);
+        String option = "no";
+        System.out.println("Welcome to e-commerce");
+        System.out.println("\nHow can we help you? ");
+        System.out.println("\nDo you want to purchase? \nPlease entry 'yes' to continue ou 'no' cancel ");
+        option = sc.next();
+
+        while(!option.equalsIgnoreCase("no")){
+
+            System.out.println("\nWhich sector do you want to make your purchases?");
+            System.out.println("\nFor Beauty inform 'b',\n for Food inform 'f',\n for Eletronic inform 'e' and \n for Auto inform 'a'");
+            option = sc.next();
+
+            switch (option.toLowerCase()){
+                case "b":
+                    System.out.println("Please insert which product do you what to buy?");
+                    String product = sc.next();
+                    System.out.println("Please inform how many products do you want?");
+                    int quantityOfProducts = sc.nextInt();
+                    option = "no";
+                break;
+                default:
+                    System.out.println("end");
+            }
+        }
 
 
 

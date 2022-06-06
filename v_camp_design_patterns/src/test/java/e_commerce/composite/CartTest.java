@@ -3,8 +3,6 @@ package e_commerce.composite;
 import e_commerce.builders.BeautyProductsBuilder;
 import e_commerce.builders.FoodProductsBuilder;
 import e_commerce.director.ProductDiretor;
-import e_commerce.composite.Cart;
-import e_commerce.composite.Catalog;
 import e_commerce.model.Product;
 import e_commerce.singleton.ProductInventory;
 import org.junit.Before;
@@ -43,15 +41,15 @@ public class CartTest {
     @Test
     public void b_removeItem() {
         cart.addItem(product, 2);
-        System.out.println(cart.cart.get(product));
+        System.out.println(cart.cartList.get(product));
         cart.removeItem(product,1);
-        System.out.println(cart.cart.get(product));
+        System.out.println(cart.cartList.get(product));
     }
 
     @Test
     public void c_getProducts() {
         cart.addItem(product, 5);
-        System.out.println(cart.cart.get(product));
+        System.out.println(cart.cartList.get(product));
 
 
     }

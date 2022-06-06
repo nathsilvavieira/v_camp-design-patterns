@@ -8,28 +8,39 @@ import java.util.List;
 
 public class Orderlist implements Iterator<Order> {
 
-    private Orderlist orderlist;
+    private static Orderlist orderlist = Orderlist.getInstance();
 
-    public List<Order> orderList = new ArrayList<>();
+    public List<Order> ordersFromCartList = new ArrayList<Order>();
 
-    private Orderlist(Orderlist orderlist) {
+    private int positionList = 0;
+
+    private Orderlist() {
         this.orderlist = orderlist;
     }
 
-    public Orderlist getInstance() {
+    public static Orderlist getInstance() {
+        if(orderlist==null){
+            orderlist = new Orderlist();
+            return orderlist;
+        }
         return orderlist;
     }
 
-    public Iterator<Order> iterator(){
-        return new Orderlist(orderlist);
+    public static Iterator<Order> iterator(){
+        return new Orderlist();
     }
     @Override
     public boolean hasNext() {
-        return orderlist.iterator().hasNext();
+        return !ordersFromCartList.isEmpty();
     }
 
     @Override
     public Order next() {
-        return orderlist.next();
+        if(!hasNext()){
+            return null;
+        }
+        Order order = ordersFromCartList.get(positionList);
+        positionList++;
+        return order;
     }
 }

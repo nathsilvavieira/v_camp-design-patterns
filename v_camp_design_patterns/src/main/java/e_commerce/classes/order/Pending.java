@@ -1,10 +1,19 @@
 package e_commerce.classes.order;
 
-public class Pending {
+import e_commerce.interfaces.IOrderFacade;
 
-    private String status = " Pending";
+public class Pending implements IOrderFacade {
 
-    public String getStatus() {
+    private String status = "Pending";
+   // private Orderlist orderlist = Orderlist.getInstance();
+
+    public String getStatusPending() {
         return status;
+    }
+
+
+    @Override
+    public void changeOrderStatus() {
+        System.out.println(getStatusPending());
     }
 }
