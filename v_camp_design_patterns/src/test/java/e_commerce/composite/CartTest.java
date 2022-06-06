@@ -69,6 +69,6 @@ public class CartTest {
     @Test
     public void f_calculateShipping() {
         cart.addItem(product, 5);
-        System.out.println(cart.calculateShippingCost(cart));
+        System.out.println(cart.calculateShippingCost());
     }
 }

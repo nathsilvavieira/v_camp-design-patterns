@@ -12,7 +12,7 @@ public class OrderFacade{
     private Shipped shipped;
     private Cancelled cancelled;
 
-    public void Facede(){
+    public OrderFacade(){
         pending = new Pending();
         paid = new Paid();
         completed = new Completed();

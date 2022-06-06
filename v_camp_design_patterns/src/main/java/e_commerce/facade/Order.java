@@ -5,28 +5,33 @@ import e_commerce.factoryMethod.ShippingFactory;
 import e_commerce.interator.Orderlist;
 import e_commerce.interfaces.IOrderObserver;
 import e_commerce.observer.OrderObserverMenager;
+import e_commerce.singleton.ProductInventory;
 
 import java.util.Random;
 
-public class Order implements IOrderObserver {
+public class Order {
 
 
     private  int orderID;
+    private  double shippingPrice;
 
     public OrderObserverMenager orderObserverMenager;
 
-    public Cart cart;
+    public ProductInventory productInventory = ProductInventory.getInstance();
 
-    public ShippingFactory shippingFactory;
+    public Cart cart = new Cart();
 
-    public OrderFacade orderStatus;
+    public ShippingFactory shippingFactory = new ShippingFactory();
+
+    public OrderFacade orderStatus = new OrderFacade();
 
     public Order() {
         Random random = new Random();
+        orderID = random.nextInt(100);
+        shippingPrice = cart.calculateShippingCost();
+        shippingFactory.createShipping(cart.getWeight());
         Orderlist.getInstance().ordersFromCartList.add(this);
         orderStatus.changeOrderToPending(cart);
-        shippingFactory.createShipping(cart.getWeight());
-        orderID = random.nextInt(100);
 
     }
 
@@ -35,8 +40,5 @@ public class Order implements IOrderObserver {
     }
 
 
-    @Override
-    public void notifyOrderChange(Order order) {
 
-    }
 }
