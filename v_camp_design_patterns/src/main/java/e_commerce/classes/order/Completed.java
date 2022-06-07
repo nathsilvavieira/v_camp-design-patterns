@@ -18,4 +18,10 @@ public class Completed implements IOrderFacade {
     public void changeOrderStatus() {
         System.out.println(getStatusCompleted());
     }
+
+    @Override
+    public String toString() {
+        return "Completed";
+
+    }
 }

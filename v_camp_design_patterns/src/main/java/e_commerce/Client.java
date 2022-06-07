@@ -41,45 +41,39 @@ public class Client {
 
         ProductInventory productInventory = ProductInventory.getInstance();
 
-        //System.out.println(productInventory); apenas para testar
 
         System.out.println("\nConsulting Beauty Product in stock "+productInventory.getProductQuantity(beauty));
 
 
-       // productInventory.removeProductFromStock(food,2); apenas para testar
-       // productInventory.blockProductsFromStock(food,2); apenas para testar
-       // productInventory.addProductFromStock(food,3); apenas para testar
-
-
-        Cart cart = new Cart();
+        Cart cartClient = new Cart();
 
         System.out.println("\nOpen your cart, please insert your products and quantities" );
 
         System.out.println("\n----------------------------------------------------------\n");
-        cart.addItem(beauty,2);
+        cartClient.addItem(beauty,2);
 
-        cart.addItem(eletro,1);
+        cartClient.addItem(eletro,1);
 
-        cart.removeItem(beauty,1);
+        cartClient.removeItem(beauty,1);
 
         System.out.println("\n----------------------------------------------------------\n");
 
-        System.out.println("Products add quantity "+ cart.getProducts());
+        System.out.println("Products add quantity "+ cartClient.getProducts());
 
         System.out.println("\n");
 
-        System.out.println("Products price total $"+ cart.getTotal());
+        System.out.println("Products price total $"+ cartClient.getTotal());
 
         System.out.println("\n");
 
-        System.out.println("Products weigth "+ cart.getWeight());
+        System.out.println("Products weigth "+ cartClient.getWeight());
 
 
         ShippingFactory shippingFactory = new ShippingFactory();
 
         System.out.println("\n******************************************************************\n");
 
-        System.out.println("Your products will be shipped by  " + shippingFactory.createShipping(cart.getWeight()).description());
+        System.out.println("Your products will be shipped by  " + shippingFactory.createShipping(cartClient.getWeight()).description());
 
         System.out.println("\n******************************************************************\n");
 
@@ -87,12 +81,18 @@ public class Client {
 
         System.out.println("Creating your Order");
 
+        order.setShippingType(String.valueOf(shippingFactory.createShipping(cartClient.getWeight()).description()));
+        order.setShippingPrice(cartClient.calculateShippingCost());
+        order.cart.cartList.putAll(cartClient.cartList);
+
         System.out.println("\n******************************************************************\n");
 
         System.out.println("Order ID "+ order.getOrderID()+"\nOrder Status:");
-        order.orderStatus.changeOrderToPending(cart);
-        System.out.println("Order shipping "+ order.getShippingFactory().createShipping(cart.getWeight()).description());
-        System.out.println("Order price "+ order.cart.calculateShippingCost());
+        order.orderStatus.changeOrderToPaid(cartClient);
+
+        System.out.println("Cart products: "+order.cart.cartList);
+
+        System.out.println("Order shipping price "+order.getShippingPrice());
 
         System.out.println("\n******************************************************************\n");
 
@@ -100,13 +100,55 @@ public class Client {
 
         Orderlist orderlist = Orderlist.getInstance();
 
+        System.out.println("\n----------------------------------------------------------\n");
+
+
         OrderFacade orderFacade = new OrderFacade();
 
         Backoffice backoffice = new Backoffice();
 
-        //backoffice.notifyOrderChange(order);
 
-        backoffice.renderOrderList();
+        backoffice.renderOrderList(order.getOrderID());
+
+        System.out.println("\n******************************************************************\n");
+
+        System.out.println("\nOpen new Cart Products\n");
+
+        Cart cartClient2 = new Cart();
+
+        cartClient2.addItem(food,5);
+        cartClient2.addItem(eletro,6);
+        cartClient2.getProducts();
+        cartClient2.getWeight();
+        cartClient2.getTotal();
+
+
+
+        Order orderClient2 = new Order();
+
+        System.out.println("Creating your Order");
+
+        orderClient2.setShippingType(String.valueOf(shippingFactory.createShipping(cartClient2.getWeight()).description()));
+        orderClient2.setShippingPrice(cartClient.calculateShippingCost());
+        orderClient2.cart.cartList.putAll(cartClient2.cartList);
+
+        System.out.println("\n******************************************************************\n");
+
+        System.out.println("Order ID "+ orderClient2.getOrderID()+"\nOrder Status:");
+
+        System.out.println("Cart products: "+orderClient2.cart.cartList);
+
+        System.out.println("Order shipping "+ orderClient2.getShippingType());
+
+        System.out.println("Order shipping price "+orderClient2.getShippingPrice());
+
+        System.out.println("\n******************************************************************\n");
+
+        System.out.println("Order sent to the backoffice");
+
+
+        backoffice.renderOrderList(orderClient2.getOrderID());
+
 
 
 

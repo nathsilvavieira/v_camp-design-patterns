@@ -22,7 +22,7 @@ public class OrderObserverMenager {
 
     public void notifyChange(Order order){
         for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).notifyOrderChange(order);
+            listeners.get(i);
         }
     }
 }

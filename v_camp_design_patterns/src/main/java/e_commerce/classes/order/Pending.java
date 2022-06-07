@@ -5,7 +5,6 @@ import e_commerce.interfaces.IOrderFacade;
 public class Pending implements IOrderFacade {
 
     private String status = "Pending";
-   // private Orderlist orderlist = Orderlist.getInstance();
 
     public String getStatusPending() {
         return status;
@@ -19,9 +18,8 @@ public class Pending implements IOrderFacade {
 
     @Override
     public String toString() {
-        return "Pending{" +
-                "status='" + status + '\'' +
-                '}';
+        return "Pending";
+
     }
 }
 

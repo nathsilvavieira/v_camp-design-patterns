@@ -4,5 +4,7 @@ import e_commerce.facade.Order;
 
 public interface IOrderObserver {
 
-     void notifyOrderChange(Order order);
+     void renderOrderList(int orderId);
+
+
 }

@@ -26,5 +26,10 @@ public class Cancelled implements IOrderFacade {
        System.out.println(getStatusCancelled());
 
     }
+    @Override
+    public String toString() {
+        return "Cancelled";
+
+    }
 
 }

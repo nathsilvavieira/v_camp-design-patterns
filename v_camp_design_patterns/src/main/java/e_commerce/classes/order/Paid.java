@@ -6,7 +6,7 @@ import e_commerce.interfaces.IOrderFacade;
 public class Paid implements IOrderFacade {
 
     Cart cart;
-    private String status = " Order paid";
+    private String status = "Order paid";
 
     public String getStatus() {
         return status;
@@ -15,5 +15,11 @@ public class Paid implements IOrderFacade {
     @Override
     public void changeOrderStatus() {
         System.out.println(getStatus());
+    }
+
+    @Override
+    public String toString() {
+        return "Paid";
+
     }
 }

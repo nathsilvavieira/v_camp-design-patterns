@@ -9,11 +9,13 @@ import e_commerce.singleton.ProductInventory;
 
 import java.util.Random;
 
-public class Order implements IOrderObserver {
+public class Order {
 
 
     private  int orderID;
     private  double shippingPrice;
+
+    private String shippingType;
 
     public OrderObserverMenager orderObserverMenager;
 
@@ -27,16 +29,28 @@ public class Order implements IOrderObserver {
 
     public Order() {
         Random random = new Random();
-        orderID = random.nextInt(100);
-        shippingPrice = cart.calculateShippingCost();
-        shippingFactory.createShipping(cart.getWeight());
+        this.orderStatus = orderStatus;
+        this.orderID = random.nextInt(100);
+        this.shippingPrice = shippingPrice;
+        this.shippingType = shippingType;
+        this.cart = cart;
         Orderlist.getInstance().ordersFromCartList.add(this);
+    }
 
+    public OrderFacade  getOrderStatus(){
+        return orderStatus;
+    }
 
+    public void setOrderStatus(OrderFacade orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public int getOrderID() {
         return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public double getShippingPrice() {
@@ -47,34 +61,23 @@ public class Order implements IOrderObserver {
         this.shippingPrice = shippingPrice;
     }
 
-    public Cart getCart() {
-        return cart;
+    public String getShippingType() {
+        return shippingType;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setShippingType(String shippingType) {
+        this.shippingType = shippingType;
     }
 
-    public ShippingFactory getShippingFactory() {
-        return shippingFactory;
-    }
 
-    public void setShippingFactory(ShippingFactory shippingFactory) {
-        this.shippingFactory = shippingFactory;
-    }
-
-    public OrderFacade getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderFacade orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     @Override
-    public void notifyOrderChange(Order order) {
+    public String toString() {
+        return
+                "Order id : " + orderID +
+                ", shipping price: " + shippingPrice +
+                ", shipping: " + shippingType + ",\n" +
+                "products list: " + cart.cartList ;
 
     }
-
-
 }
