@@ -6,7 +6,7 @@ import e_commerce.model.Product;
 
 public class FoodProductsBuilder implements IProductBuilder {
 
-    private FoodProducts product= new FoodProducts("ProdutoB", "SKU123", 0.0, 0.0,"Default", "Default");
+    private FoodProducts product= new FoodProducts("Food Product", "FOO123", 1.0, 0.3,"Food", "Cookies");
 
     @Override
     public IProductBuilder buildName(String name) {

@@ -2,37 +2,37 @@ package e_commerce.model;
 
 public class EletronicProducts extends Product {
 
-    private String categoryAuto;
-    private String subCategoryAuto;
+    private String categoryEletronic;
+    private String subCategoryEletronic;
 
-    public EletronicProducts(String name, String sku, double price, double weight, String categoryAuto, String subCategoryAuto) {
+    public EletronicProducts(String name, String sku, double price, double weight, String categoryEletronic, String subCategoryEletronic) {
         super(name, sku, price, weight);
-        this.categoryAuto = categoryAuto;
-        this.subCategoryAuto = subCategoryAuto;
+        this.categoryEletronic = categoryEletronic;
+        this.subCategoryEletronic = subCategoryEletronic;
     }
 
-    public String getCategoryAuto() {
-        return categoryAuto;
+    public String getCategoryEletronic() {
+        return categoryEletronic;
     }
 
-    public void setCategoryAuto(String categoryAuto) {
-        this.categoryAuto = categoryAuto;
+    public void setCategoryEletronic(String categoryEletronic) {
+        this.categoryEletronic = categoryEletronic;
     }
 
-    public String getSubCategoryAuto() {
-        return subCategoryAuto;
+    public String getSubCategoryEletronic() {
+        return subCategoryEletronic;
     }
 
-    public void setSubCategoryAuto(String subCategoryAuto) {
-        this.subCategoryAuto = subCategoryAuto;
+    public void setSubCategoryEletronic(String subCategoryEletronic) {
+        this.subCategoryEletronic = subCategoryEletronic;
     }
 
 
     @Override
     public String toString() {
         return "Product description { name = '" +getName()+"', SKU = '"+getSku()+"', price $ "+getPrice()+", weight "+getWeight()+
-                ", category = '" + categoryAuto + '\'' +
-                ", subCategory = '" + subCategoryAuto + '\'' +
+                ", category = '" + categoryEletronic + '\'' +
+                ", subCategory = '" + subCategoryEletronic + '\'' +
                 '}';
     }
 }

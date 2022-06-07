@@ -37,4 +37,9 @@ public class Catalog {
         return productList;
     }
 
+    @Override
+    public String toString() {
+        return "Catalog{" +
+                "productList=" + productList +'}';
+    }
 }

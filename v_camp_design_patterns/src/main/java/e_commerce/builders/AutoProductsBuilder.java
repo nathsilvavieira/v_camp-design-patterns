@@ -8,7 +8,7 @@ import e_commerce.model.AutoProducts;
 
 public class AutoProductsBuilder implements IProductBuilder {
 
-    private AutoProducts product= new AutoProducts("ProdutoD", "SKU123", 0.0, 0.0,"Default", "Default");
+    private AutoProducts product= new AutoProducts("Auto", "AUT123", 10.0, 0.5,"Auto", "Cleaning");
 
     @Override
     public IProductBuilder buildName(String name) {

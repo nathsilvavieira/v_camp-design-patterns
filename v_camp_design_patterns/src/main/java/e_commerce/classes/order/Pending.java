@@ -16,4 +16,13 @@ public class Pending implements IOrderFacade {
     public void changeOrderStatus() {
         System.out.println(getStatusPending());
     }
+
+    @Override
+    public String toString() {
+        return "Pending{" +
+                "status='" + status + '\'' +
+                '}';
+    }
 }
+
+

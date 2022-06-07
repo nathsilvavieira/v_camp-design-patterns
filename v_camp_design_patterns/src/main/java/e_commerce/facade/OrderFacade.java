@@ -44,6 +44,25 @@ public class OrderFacade{
 
     }
 
+    public Pending getPending() {
+        return pending;
+    }
+
+    public Paid getPaid() {
+        return paid;
+    }
+
+    public Completed getCompleted() {
+        return completed;
+    }
+
+    public Shipped getShipped() {
+        return shipped;
+    }
+
+    public Cancelled getCancelled() {
+        return cancelled;
+    }
 
 
 }

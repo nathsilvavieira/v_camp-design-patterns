@@ -7,7 +7,7 @@ import e_commerce.model.EletronicProducts;
 public class EletronicProductsBuilder implements IProductBuilder {
 
 
-    private EletronicProducts product= new EletronicProducts("ProdutoC", "SKU123", 0.0, 0.0,"Default", "Default");
+    private EletronicProducts product= new EletronicProducts("Eletronic Product", "ELE123", 100.0, 2.0,"Eletronics", "Home");
 
     @Override
     public IProductBuilder buildName(String name) {
@@ -34,19 +34,19 @@ public class EletronicProductsBuilder implements IProductBuilder {
     }
 
     public IProductBuilder buildSubCategoryAuto(String subCategoryAuto) {
-        product.setSubCategoryAuto(subCategoryAuto);
+        product.setSubCategoryEletronic(subCategoryAuto);
         return this;
     }
 
     public IProductBuilder buildCategoryAuto(String categoryAuto) {
-        product.setCategoryAuto(categoryAuto);
+        product.setCategoryEletronic(categoryAuto);
         return this;
     }
 
 
     @Override
     public Product build() {
-        return new EletronicProducts(product.getName(), product.getSku(), product.getPrice(), product.getWeight(), product.getCategoryAuto(), product.getSubCategoryAuto());
+        return new EletronicProducts(product.getName(), product.getSku(), product.getPrice(), product.getWeight(), product.getCategoryEletronic(), product.getSubCategoryEletronic());
     }
 
 }

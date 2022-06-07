@@ -118,4 +118,10 @@ public class ProductInventory {
         }
     }
 
+    @Override
+    public String toString() {
+        return "ProductInventory{" +
+                "stockList=" + stockList +
+                '}';
+    }
 }

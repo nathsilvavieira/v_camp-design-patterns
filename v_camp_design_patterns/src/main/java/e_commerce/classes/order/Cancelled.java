@@ -26,4 +26,5 @@ public class Cancelled implements IOrderFacade {
        System.out.println(getStatusCancelled());
 
     }
+
 }

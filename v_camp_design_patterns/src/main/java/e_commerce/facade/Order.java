@@ -9,7 +9,7 @@ import e_commerce.singleton.ProductInventory;
 
 import java.util.Random;
 
-public class Order {
+public class Order implements IOrderObserver {
 
 
     private  int orderID;
@@ -31,7 +31,7 @@ public class Order {
         shippingPrice = cart.calculateShippingCost();
         shippingFactory.createShipping(cart.getWeight());
         Orderlist.getInstance().ordersFromCartList.add(this);
-        orderStatus.changeOrderToPending(cart);
+
 
     }
 
@@ -39,6 +39,42 @@ public class Order {
         return orderID;
     }
 
+    public double getShippingPrice() {
+        return shippingPrice;
+    }
+
+    public void setShippingPrice(double shippingPrice) {
+        this.shippingPrice = shippingPrice;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public ShippingFactory getShippingFactory() {
+        return shippingFactory;
+    }
+
+    public void setShippingFactory(ShippingFactory shippingFactory) {
+        this.shippingFactory = shippingFactory;
+    }
+
+    public OrderFacade getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderFacade orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    @Override
+    public void notifyOrderChange(Order order) {
+
+    }
 
 
 }
