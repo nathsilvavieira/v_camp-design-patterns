@@ -49,4 +49,13 @@ Crie uma classe chamada `Backoffice` que irá exibir os dados do pedido a equipe
 - Fique a vontade para implementar classes, métodos, propriedades ou qualquer características que julgar necessário para melhor funcionamento deste exercício e adequação ao cenário proposto.
 - O projeto pode ser feito em linha de comando ou um serviço Web simples.
 - Não deixe de seguir o escopo acima ou implementar algum requisito.
+
+
+ ## Resolução 
  
+ Para executar o projeto, realize o clone no mesmo e execute em uma IDE. 
+
+![Excutando 1](https://user-images.githubusercontent.com/83051644/172422280-1a433227-6989-4fe1-8bfb-ce7cde035da7.PNG)
+![Excutando 2](https://user-images.githubusercontent.com/83051644/172422289-3aefc079-1c8b-4218-8e61-2b369fc2f231.PNG)
+![Excutando 3](https://user-images.githubusercontent.com/83051644/172422293-6b3f200a-7460-4b31-8cd8-f119d0d0c48f.PNG)
+
